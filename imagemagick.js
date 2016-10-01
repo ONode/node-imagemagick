@@ -22,6 +22,10 @@ function exec2(file, args /*, options, callback */) {
   }
 
   var child = childproc.spawn(file, args);
+  child.on('error', function(err){
+  	callback(err, "", "");
+  });
+  
   var killed = false;
   var timedOut = false;
 
