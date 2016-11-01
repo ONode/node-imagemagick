@@ -177,6 +177,15 @@ im.crop({
 });
 ```
 
+### GIF support ###
+just add `gif` as the format option in `options`
+
+```
+options = {format: "gif"}
+```
+
+
+
 Further tweaks that is worth to check out for memory management.
 
 ** http://stackoverflow.com/questions/27917851/broken-results-on-batch-convert-with-imagemagick-command-line-on-linux **

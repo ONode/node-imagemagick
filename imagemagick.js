@@ -415,6 +415,10 @@ exports.resizeArgs = function (options) {
     args.push('-strip');
   }
 
+  if (opt.format === 'gif') {
+    args.push('-coalesce');
+  }
+
   var has_dimension_size = opt.width > 0 || opt.height > 0;
   var has_percent = opt.percent > 0.0;
   var has_area_pixels = opt.area_total_pixels > 0;

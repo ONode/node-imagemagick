@@ -2,6 +2,7 @@ var fs = require('fs'),
   im = require('./imagemagick');
 
 var path = __dirname + '/sample-images/blue-bottle-coffee.jpg';
+var target_dst_path = __dirname + '/sample-images/';
 var imdata = fs.readFileSync(path, 'binary');
 
 im.identify(path, function (err, features) {
@@ -47,6 +48,6 @@ im.resize({
   if (err) return console.error(err.stack || err);
   console.log('real time taken for convert (with buffers): ' +
     ((new Date) - timeStarted) + ' ms');
-  fs.writeFileSync('test-resized-io.jpg', stdout, 'binary');
+  fs.writeFileSync(target_dst_path+'test-resized-io.jpg', stdout, 'binary');
   console.log('resize(...) wrote "test-resized.jpg" (' + stdout.length + ' Bytes)');
 });

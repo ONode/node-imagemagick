@@ -2,12 +2,12 @@ var fs = require('fs'),
   im = require('./imagemagick');
 
 var path = __dirname + '/sample-images/blue-bottle-coffee.jpg';
-
+var target_dst_path = __dirname + '/sample-images/';
 (function () {
   var opt, timeStarted = new Date;
   im.crop(opt = {
     srcPath: path,
-    dstPath: 'cropped.jpg',
+    dstPath: target_dst_path + 'cropped.jpg',
     width: 200,
     height: 90,
     quality: 1
@@ -22,7 +22,7 @@ var path = __dirname + '/sample-images/blue-bottle-coffee.jpg';
   var opt, timeStarted = new Date;
   im.crop(opt = {
     srcPath: path,
-    dstPath: 'cropped2.jpg',
+    dstPath: target_dst_path + 'cropped2.jpg',
     width: 200,
     height: 90,
     gravity: "North",

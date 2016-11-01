@@ -1,7 +1,7 @@
 {
   "name": "zyn-imagemagick",
   "description": "A wrapper around the imagemagick cli",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "author": "Hesk <http://heskeyo.com>",
   "licenses": [
     "MIT"
