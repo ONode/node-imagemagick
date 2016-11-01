@@ -184,7 +184,26 @@ just add `gif` as the format option in `options`
 options = {format: "gif"}
 ```
 
+### SVG spport ###
 
+Fixed (identify) parse could resolve multiline value
+```svg
+  
+Clipping path: 
+<?xml version="1.0" encoding="iso-8859-1"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1565" height="2319">
+<g>
+<path fill-rule="evenodd" style="fill:#00000000;stroke:#00000000;stroke-width:0;stroke-antialiasing:false" d="
+M 0.218931 0.248387
+L 1564.75 0.248387
+L 1564.75 2319
+L 0.218931 2319
+L 0.218931 0.248387 Z
+"/>
+</g>
+</svg>
+
+```
 
 Further tweaks that is worth to check out for memory management.
 
