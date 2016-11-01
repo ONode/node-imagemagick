@@ -1,10 +1,17 @@
-{ "name"        : "hanul-imagemagick"
-, "description" : "A wrapper around the imagemagick cli"
-, "version"     : "0.1.4"
-, "author"      : "Hanul <http://hanul.me>"
-, "licenses"    : ["MIT"]
-, "repository"  : { "type" : "git"
-                  , "url"  : "http://github.com/Hanul/node-imagemagick.git" }
-, "engine"      : ["node >=0.6"]
-, "main"        : "imagemagick"
+{
+  "name": "zyn-imagemagick",
+  "description": "A wrapper around the imagemagick cli",
+  "version": "0.1.6",
+  "author": "Hesk <http://heskeyo.com>",
+  "licenses": [
+    "MIT"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ONode/node-imagemagick.git"
+  },
+  "engine": [
+    "node >=0.6"
+  ],
+  "main": "imagemagick"
 }

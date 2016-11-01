@@ -6,14 +6,14 @@
 
 You can install this module using [npm](http://github.com/isaacs/npm):
 
-    npm install hanul-imagemagick
+    npm install zyn-imagemagick
 
-Requires imagemagick CLI tools to be installed. There are numerous ways to install them. For instance, if you're on OS X you can use [Homebrew](http://mxcl.github.com/homebrew/): `brew install imagemagick`.
+Requires imagemagick CLI tools to be installed. There are numerous ways to install them. For instance, if you're on OS X you can use [Homebrew](http://mxcl.github.com/homebrew/): `brew install zyn-imagemagick`.
 
 ## Example
 
 ```javascript
-var im = require('imagemagick');
+var im = require('zyn-imagemagick');
 im.readMetadata('kittens.jpg', function(err, metadata){
   if (err) throw err;
   console.log('Shot at '+metadata.exif.dateTimeOriginal);
@@ -95,23 +95,42 @@ The `options` argument have the following default values:
 
 ```javascript
 {
-  srcPath: undefined,
-  srcData: null,
-  srcFormat: null,
-  dstPath: undefined,
-  quality: 0.8,
-  format: 'jpg',
-  progressive: false,
-  width: 0,
-  height: 0,
-  strip: true,
-  filter: 'Lagrange',
-  sharpening: 0.2,
-  customArgs: []
+    srcPath: null,
+    srcData: null,
+    srcFormat: null,
+    dstPath: null,
+    quality: 0.8,
+    format: 'jpg',
+    progressive: false,
+    colorspace: null,
+    width: 0,
+    height: 0,
+    percent: 0, 
+    area_total_pixels: 0, 
+    resize_operation: 0,
+    strip: true,
+    filter: 'Lagrange',
+    sharpening: 0.2,
+    customArgs: [],
+    timeout: 0
 }
 ```
+`resize_operation` have the below operations. Please see this for detail: 
+**http://www.imagemagick.org/Usage/resize/#liquid-rescale**
 
-srcPath, dstPath and (at least one of) width and height are required. The rest is optional.
+Serial No. | operation | documentation
+--- | --- | ---
+0 | standard operation | `convert dragon.gif -resize 64x64 resize_dragon.gif`
+1 | Ignore Aspect Ratio | `convert dragon.gif -resize 64x64\! exact_dragon.gif`
+2 | Only Shrink Larger Images ('>' flag) | `convert dragon.gif -resize 64x64\> shrink_dragon.gif`
+3 | Only Enlarge Smaller Images ('<' flag) | The most notable use is with a argument such as '1x1<'. This resize argument will never actually resize any image. In other words it's a no-op, which will allow you to short circuit a resize operation in programs and scripts which always uses "-resize". Other than that you probably do not actually want to use this feature.
+4 | Fill Area Flag ('^' flag) | `convert dragon.gif -resize 64x64^ fill_dragon.gif`
+5 | Percentage Resize ('%' flag) |  `convert dragon.gif -resize 50% half_dragon.gif`. You will have to use param `percent` from the options in between 0 and 100
+6 | Resize using a Pixel Area Count Limit ('@' flag) | `convert dragon.gif -resize 4096@ pixel_dragon.gif`
+7 | Resize During Image Read | `convert dragon.gif'[64x64]' read_dragon.gif` You will have to use param `area_total_pixels` from the options in between 0 and the max value that 
+
+
+srcPath, dstPath and (at least one of) width and height are required. The rest is optional. The size is normally set to be `resize_aspect_ratio` as true for make the proportional resize operation.
 
 Example:
 
@@ -158,9 +177,13 @@ im.crop({
 });
 ```
 
+Further tweaks that is worth to check out for memory management.
+
+** http://stackoverflow.com/questions/27917851/broken-results-on-batch-convert-with-imagemagick-command-line-on-linux **
+
 ## License (MIT)
 
-Copyright (c) 2010-2012 Hanul <http://hanul.me>
+Copyright (c) 2010-2016 Zyntauri <https://zyntauri.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
