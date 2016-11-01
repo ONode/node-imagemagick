@@ -288,6 +288,36 @@ var resizeCall = function (t, callback) {
   }
   return proc;
 };
+var simpleCall = function (t, callback) {
+  var proc = exports.convert(t.args, 0, callback);
+  if (t.opt.srcPath.match(/-$/)) {
+    if ('string' === typeof t.opt.srcData) {
+      proc.stdin.setEncoding('binary');
+      proc.stdin.write(t.opt.srcData, 'binary');
+      proc.stdin.end();
+    } else {
+      proc.stdin.end(t.opt.srcData);
+    }
+  }
+  return proc;
+
+};
+exports.EXIFAutoRotate = function (options, callback) {
+  var default_options = {
+    srcPath: null,
+    dstPath: null,
+    srcData: null
+  };
+  var _args = [];
+  if (options.srcPath) {
+    _args.push(options.srcPath);
+  }
+  _args.push("-auto-orient");
+  if (options.dstPath) {
+    _args.push(options.dstPath);
+  }
+  return simpleCall({args: _args, opt: options}, callback)
+};
 
 exports.resize = function (options, callback) {
   var t = exports.resizeArgs(options);
@@ -391,7 +421,8 @@ exports.resizeArgs = function (options) {
     filter: 'Lagrange',
     sharpening: 0.2,
     customArgs: [],
-    timeout: 0
+    timeout: 0,
+    debug: false
   };
 
   // check options
@@ -479,8 +510,8 @@ exports.resizeArgs = function (options) {
   if (Array.isArray(opt.customArgs) && opt.customArgs.length)
     args = args.concat(opt.customArgs);
   args.push(opt.dstPath);
-
-  console.log("command", args);
-
+  if (opt.debug) {
+    console.log("==> im:: debug for final command :: ", args);
+  }
   return {opt: opt, args: args};
 };

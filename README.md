@@ -86,6 +86,20 @@ function(err, stdout){
   console.log('stdout:', stdout);
 });
 ```
+### Auto rotate support ###
+
+```javascript
+var options = {
+    srcPath: "your input image file",
+    dstPath: "your output image file"
+}
+
+im.EXIFAutoRotate(options, function(err, stdout){
+  if (err) throw err;
+  console.log('stdout:', stdout);
+});
+```
+
 
 ### resize(options, callback(err, stdout, stderr))
 
